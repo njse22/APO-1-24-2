@@ -14,6 +14,10 @@ public class Premium extends User {
 	this.subscriptionDate = subscriptionDate; 
 	this.dissacount = dissacount;
     }
+    
+    public String toString(){
+	return this.name; 
+    }
 
 
 }
