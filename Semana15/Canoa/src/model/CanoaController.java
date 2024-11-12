@@ -29,7 +29,7 @@ public class CanoaController {
 
 	}
 	else{
-	    user = new Premium(name, document, mail, phone, subscriptionDate, DISSACOUNT_TEN);
+	    user = new Premium(name, document, mail, phone, subscriptionDate);
 	    msg += "El usuario de tipo Premium: " + user; 
 	}
 
@@ -43,8 +43,48 @@ public class CanoaController {
        return msg;
     }
 
+    public double calculateDissacountPremiumUser(User premium, double total){
+	//return total - (total * DISSACOUNT_TEN); 
+	return ( (Premium) premium ).calculateDissaccount(total); 
+    }
 
-    int getEmptyPosition(){
+    public double calculateCostPassenger(String userDocument, Pasaje pasaje, double kilometers){
+	// tipo de pasaje -> valor por kilometro
+	// kilometros recorridos 
+	User user = getUserByDocument(userDocument); 
+	double total = 0.0;
+
+	if(pasaje instanceof Economico){
+	    total += (80*kilometers) + 50000;
+	}
+	else if (pasaje instanceof Ejecutivo){
+	    total += 120*kilometers + 80000;
+	}
+
+	if (user instanceof Premium){
+	    total = calculateDissacountPremiumUser(user, total);
+	}
+
+	return total; 
+    }
+
+
+    private User getUserByDocument(String document){
+
+	User user = null; 
+	boolean isFound = false;
+
+	for(int i = 0; i < USERS_SIZE && !isFound; i++){
+	    if(users[i].getDocument().equals(document)){
+		user = users[i]; 
+		isFound = true;
+	    }
+	}
+	return user; 
+    }
+
+    // ¿Cual es la visivilidad del método? 
+    private int getEmptyPosition(){
 	int position = -1; 
 	boolean isFound = false;
 

@@ -22,4 +22,8 @@ public abstract class User {
 	this.name = name; 
     }
 
+    public String getDocument(){
+	return this.document;
+    }
+
 }

@@ -3,6 +3,9 @@ package ui;
 import java.util.Scanner;
 import java.util.Date;
 import model.CanoaController;
+import model.User;
+import model.Regular;
+import model.Premium;
 
 public class Main{
 
@@ -23,7 +26,15 @@ public class Main{
 	
 
 	Main main = new Main(); 
-	main.addUser();
+
+
+	User regular = new Regular("user1", "A00", "user@mail.com", "1234"); 
+	User premium = new Premium("user1", "A00", "user@mail.com", "1234", new Date()); 
+
+	( (Premium)premium ).getName(); 
+
+	//main.addUser();
+
 
     }
 
