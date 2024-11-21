@@ -1,26 +1,18 @@
 package model; 
 
-public class Person{
-    private String name; 
+public class Person extends Mammal  implements IMove{
+
     private String id; 
     private String nationality; 
-    private double weight; 
-    private double height; 
     private double imc; 
 
-    public Person(String name, String id, String nationality, double weight, 
-	    double height){
-	this.name = name; 
+    public Person(double weight, double height, int age, String name, 
+	    String id, String nationality){
+	super(weight, height, age, name);
 	this.id = id; 
 	this.nationality = nationality; 
-	this.weight = weight; 
-	this.height = height; 
-	this.imc = calculateImc(this.weight, this.height); 
+	this.imc = calculateImc(super.weight, super.height); 
 
-    }
-
-    public String getName(){
-	return this.name;
     }
 
     public String getId(){
@@ -30,13 +22,6 @@ public class Person{
 	return this.nationality;
     }
 
-    public double getWeight(){
-	return this.weight; 
-    }
-
-    public double getHeight(){
-	return this.height; 
-    }
 
     public double getImc(){
 	return imc; 
@@ -45,4 +30,21 @@ public class Person{
     private double calculateImc(double weight, double height){
 	return weight/Math.pow(height, 2); 
     }
+
+    @Override
+    public String communication(){
+	return "Hello, from Person"; 
+    }
+
+
+    @Override
+    public String jump(double input){
+	return "The person jumps " + input + " meters";
+    }
+
+    //@Override
+    //public String run(double input){
+    //    return "The person runs " + input + " meters";
+    //}
+
 }

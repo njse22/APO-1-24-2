@@ -11,20 +11,28 @@ public class Controller{
 
 
     private ArrayList<Person> people; 
+    private ArrayList<Animal> animals;
 
     // declaran la matriz
     private String[][] stadistics; 
+    private Cat[][] cats; 
 
     public Controller(){
 	people = new ArrayList<>(); 
 	// inicializan la matriz
 	stadistics = new String[ROWS][COLUMNS]; 
+	animals = new ArrayList<>();
+
+	animals.add(new Leon(102, 1.65, 5, "Leon 1"));
+	animals.add(new Cat(102, 1.65, 5, "Cat 1"));
+	animals.add(new Leon(102, 1.65, 5, "Leon 2"));
+	animals.add(new Leon(102, 1.65, 5, "Leon 3"));
 
     }
 
-    public boolean addPerson(String name, String id, String nationality, double weight, 
-	    double height ){
-	Person newPerson = new Person(name, id, nationality, weight, height);
+    public boolean addPerson(double weight, 
+	    double height, int age, String name, String id, String nationality ){
+	Person newPerson = new Person(weight, height, age, name, id, nationality );
 	return people.add(newPerson); 
     }
 
@@ -67,6 +75,25 @@ public class Controller{
 	}
     }
 
+    public Cat[][] generateCatsMatrix(){
+	Cat[][] cats = new Cat[ROWS][COLUMNS]; 
+
+	for(int i = 0; i < ROWS; i++){
+	    System.out.println("FILA: " + i);
+	    System.out.println("\n");
+
+	    for(int j = 0; j < COLUMNS; j++){
+
+	    System.out.println("COLUMNA: " + j);
+		if(animals.get(i) instanceof Cat){
+		    cats[i][j] = (Cat)animals.get(i); 
+		}
+	    }
+	}
+
+	return cats;
+
+    }
 
     public String printMatrix(){
 	String msg = ""; 
@@ -96,6 +123,10 @@ public class Controller{
 	    }
 	}
 	return msg; 
+    }
+
+    public ArrayList<Person> getPeople(){
+	return people;
     }
 
 }
